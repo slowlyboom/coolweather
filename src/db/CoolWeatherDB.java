@@ -17,7 +17,7 @@ public class CoolWeatherDB {
 	public static final String DB_NAME="cool_weather";
 
 	/*数据库版本*/
-	public static final int VERSION=1;
+	public static final int VERSION=2;
 	private static CoolWeatherDB coolWeatherDB;
 	private SQLiteDatabase db;
 	
@@ -46,7 +46,7 @@ public class CoolWeatherDB {
 	}
 	
 	/*从数据库读取全国所有的省份信息*/
-	public List<Province> lodaProvinces(){
+	public List<Province> loadProvinces(){
 		List<Province> list=new ArrayList<Province>();
 		Cursor cursor=db.query("Province", null, null, null, null, null, null);
 		if(cursor.moveToFirst()){
@@ -71,9 +71,9 @@ public class CoolWeatherDB {
 		}
 	}
 	/*从数据库读取某省的所有的城市信息*/
-	public List<City> lodaCitys(int provinceId){
+	public List<City> loadCitys(int provinceId){
 		List<City> list=new ArrayList<City>();
-		Cursor cursor=db.query("City", null, "province_id=?",new String[]{String.valueOf(provinceId)}, null, null, null);
+		Cursor cursor=db.query("City",null,"province_id=?",new String[]{String.valueOf(provinceId)},null, null, null);
 		if(cursor.moveToFirst()){
 			do{
 				City city=new City();
@@ -97,7 +97,7 @@ public class CoolWeatherDB {
 		}
 	}
 	/*从数据库读取全国所有的县*/
-	public List<County> lodaCountys(int cityId){
+	public List<County> loadCountys(int cityId){
 		List<County> list=new ArrayList<County>();
 		Cursor cursor=db.query("County", null, "city_id=?",new String[]{String.valueOf(cityId)}, null, null, null);
 		if(cursor.moveToFirst()){
